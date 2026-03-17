@@ -134,6 +134,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
 
+      - name: Make package public
+        run: |
+          # Try org-level first, then user-level
+          curl -sf -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/synapse-node" \
+            -d '{"visibility":"public"}' && echo "Package set to public" || \
+          echo "Could not set visibility (may need org admin)"
+
   release:
     name: GitHub Release
     runs-on: ubuntu-latest
