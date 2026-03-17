@@ -1,5 +1,9 @@
 FROM alpine:3.19
 
+LABEL org.opencontainers.image.source="https://github.com/Aktoh-Cyber/synapse-node"
+LABEL org.opencontainers.image.description="Synapse Node — deploy AI agent infrastructure on any device"
+LABEL org.opencontainers.image.licenses="Proprietary"
+
 RUN apk add --no-cache ca-certificates
 
 RUN addgroup -g 1000 synapse && \
