@@ -1,0 +1,4 @@
+synapse-node-*
+*.tar.gz
+*.zip
+checksums.txt
