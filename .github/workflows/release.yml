@@ -136,13 +136,18 @@ jobs:
 
       - name: Make package public
         run: |
-          # Try org-level first, then user-level
+          # Use SOURCE_REPO_PAT which has broader org permissions
           curl -sf -X PATCH \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.SOURCE_REPO_PAT }}" \
             "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/synapse-node" \
-            -d '{"visibility":"public"}' && echo "Package set to public" || \
-          echo "Could not set visibility (may need org admin)"
+            -d '{"visibility":"public"}' && echo "Package set to public (org API)" || \
+          curl -sf -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.SOURCE_REPO_PAT }}" \
+            "https://api.github.com/user/packages/container/synapse-node" \
+            -d '{"visibility":"public"}' && echo "Package set to public (user API)" || \
+          echo "NOTE: Set package to public manually at https://github.com/orgs/Aktoh-Cyber/packages/container/synapse-node/settings"
 
   release:
     name: GitHub Release
