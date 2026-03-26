@@ -20,4 +20,4 @@ USER synapse
 EXPOSE 8200
 
 ENTRYPOINT ["synapse-node"]
-CMD ["--data-dir", "/data/node"]
+CMD ["--data-dir", "/data/node", "--mcp-listen", "0.0.0.0:8200"]
