@@ -1,5 +1,7 @@
 # Synapse Node
 
+> **Repository type**: build-artifact distribution. Source lives in [`synapse`](https://github.com/Aktoh-Cyber/synapse) under `synapse-node/`. This repo ships the Dockerfile and release smoke-test results only. Coverage is validated indirectly via `e2e/node-deployment.spec.ts` in the SOC dashboard and via `test-results/` produced on each release tag.
+
 Deploy AI agent infrastructure on any device. Synapse Node connects to the Synapse control plane and provides local tool hosting, MCP server integration, and secure LibP2P tunneling.
 
 ## Quick Start
